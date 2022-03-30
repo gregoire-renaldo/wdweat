@@ -3,6 +3,7 @@
 
   <div class="form-group" >
     <%= form_with url: restaurants_path, method: :get, html: { class: "mb-5", data: { refresh_list_target: "form" } } do |f| %>
+      <%= f.label :query, "Search for: term" %>
       <%= f.text_field :query,
                       class: "form-control",
                       placeholder: "search for restaurants, place",

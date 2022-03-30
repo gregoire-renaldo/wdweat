@@ -30,7 +30,11 @@ export default class extends Controller {
         <span class="circle circle-8"></span>
         </div>
         `)
-    fetch('/search',{ method: "POST",})
+    const query = this.searchInputTarget.value
+
+    fetch(`/search?term=${query}`,{ method: "POST",
+          body:JSON.stringify(query)
+        })
       .then(function(response) {
         response.json()
         .then(function(data) {

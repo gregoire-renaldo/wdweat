@@ -6,7 +6,12 @@ class YelpController < ApplicationController
   skip_before_action :verify_authenticity_token #to check
 
   def search
-    @response =  RestClient.get "https://api.yelp.com/v3/businesses/search?term=brasserie&location=bordeaux",
+
+    puts"params"
+    puts params
+    puts params[:term]
+    term = params[:term]
+    @response =  RestClient.get "https://api.yelp.com/v3/businesses/search?term=#{term}&location=bordeaux",
     {content_type: :json, accept: :json, Authorization: ENV["API_KEY"]}
 
     @restaurants_info = JSON.parse(@response.body)["businesses"]

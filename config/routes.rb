@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
    get 'restaurants', to: 'pages#restaurants'
    post '/search', to: 'yelp#search'
+   post '/search_random', to: 'yelp#search_random'
 
 end

@@ -1,5 +1,5 @@
 require 'rest-client'
-require 'dotenv'
+# require 'dotenv'
 require 'json'
 # Dotenv.load
 

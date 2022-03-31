@@ -87,11 +87,7 @@ export default class extends Controller {
           console.log(target);
 
           target.innerHTML = ''
-
-
-            target.insertAdjacentHTML('beforeend',`<h1>Nous n'avons pas de résultats pour votre recherche</h1>`)
-
-
+          if (data === []) target.insertAdjacentHTML('beforeend',`<h1>Nous n'avons pas de résultats pour votre recherche</h1>`)
                 // console.log(element)
                 target.insertAdjacentHTML('beforeend', `
                   <div class="card " style="width: 18rem;margin-bottom:20px;">
@@ -104,8 +100,6 @@ export default class extends Controller {
                     </div>
                   </div>
                 `)
-
-
         });
       })
         .catch(function(error) {

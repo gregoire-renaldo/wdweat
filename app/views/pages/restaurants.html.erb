@@ -1,26 +1,26 @@
 <div class="container">
   <div data-controller="refresh-list">
 
-  <h2>Cherchez un restaurant en entrant un type de nourriture et un lieux</h2>
+  <h2 class="mt-3">Cherchez un restaurant en entrant un type de nourriture et un lieux</h2>
     <form>
       <div class="row mt-5">
         <div class="col">
-          <input type="text" class="form-control mb-2" placeholder="Type de cuisine" data-refresh-list-target="searchInput">
+          <input type="text" class="mb-2 form-control " placeholder="Type de cuisine" data-refresh-list-target="searchInput">
         </div>
         <div class="col">
           <input  type="text" class="form-control" placeholder="Location" data-refresh-list-target="searchPlace" required>
         </div>
       </div>
       <div>
-      <button type="submit" class="btn btn-primary" data-action="refresh-list#postSearch">Trouver des restauants</button>
+      <button type="submit" class="btn btn-primary" data-action="refresh-list#postSearch">Trouver des restaurants</button>
       </div>
     </form>
 
-    <div class="mt-3">
+    <div class="mt-5 mb-3">
       <h2>Pas d'inspiration ? Entrez simplement un lieu et laissez le hasard décider pour vous</h2>
       <form>
-        <div class="row mt-1">
-          <div class="col">
+        <div class="row mt-1 mb-2">
+          <div class="col ">
             <input  type="text" class="form-control" placeholder="Location" data-refresh-list-target="searchPlace2" required>
           </div>
         </div>

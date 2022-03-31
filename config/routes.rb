@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root :to => "pages#home"
 
-   get 'restaurants', to: 'pages#restaurants'
+   get 'results', to: 'pages#results'
    post '/search', to: 'yelp#search'
    post '/search_random', to: 'yelp#search_random'
 

@@ -7,9 +7,9 @@ class PagesController < ApplicationController
   def home
   end
 
-  def restaurants
+  def results
     respond_to do |format|
-      format.html 
+      format.html
     end
   end
 

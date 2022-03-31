@@ -36,7 +36,7 @@ class YelpController < ApplicationController
   def search_random
     puts"params"
     location = params[:location]
-    random_term = ["korean","Italian","Thai","Brasserie", "Indian", "Chinese", "Fromage", "Kebab"].sample
+    random_term = ["korean","Italian","Thai","Brasserie", "Indian", "Chinese", "Fromage", "Kebab", "sushis"].sample
 
     @response =  RestClient.get "https://api.yelp.com/v3/businesses/search?term=#{random_term}&location=#{location}",
     {content_type: :json, accept: :json, Authorization: ENV["API_KEY"]}

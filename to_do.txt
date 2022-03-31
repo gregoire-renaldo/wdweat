@@ -1,0 +1,5 @@
+trim spaces in inputs, search etc..
+
+loader
+
+restaurant create ? after create

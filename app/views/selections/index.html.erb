@@ -1,0 +1,13 @@
+index selections
+
+La liste de toutes mes listes  + créer une nouvelle liste
+
+<%= link_to 'Je crée une nouvelle selection', new_selection_path %>
+
+<ul>
+  <% @selections&.each do |selection| %>
+    <%= link_to(selection_path(selection)) do %>
+      <li><%= selection.name %> <%= selection.date.strftime('%d/%m/%y %H:%M') %></li>
+    <% end %>
+  <% end %>
+</ul>

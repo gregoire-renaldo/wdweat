@@ -25,4 +25,6 @@ if user logged_in? show selection
 
 empecher autre utilisateaur loggé de modifier list qui n'est pas la sienne
 
+if invtations envoyées, bloquer l'ajout de restaus
+
 validations model!!

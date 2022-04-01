@@ -98,7 +98,7 @@ export default class extends Controller {
                       <p class="card-text">Prix: ${data.price}</p>
                       <p class="card-text">Note: ${data.rating}</p>
                       <a href="${data.url}" target="blank" class="btn btn-primary">En savoir plus</a>
-                      <a href="#" class="btn btn-secondary">Ajouter à ma sélection de restaurants</a>
+                      <button data-restaurantId="${data.id}"  data-action="click->crud-restaurants#addRestaurant" class="btn btn-secondary">Ajouter à ma sélection de restaurants</button>
                     </div>
                   </div>
                 `)

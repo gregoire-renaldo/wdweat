@@ -1,5 +1,5 @@
 class Selection < ApplicationRecord
   belongs_to :user
-  has_many :restaurants
-  has_many :guests
+  has_many :restaurants, dependent: :destroy
+  has_many :guests, dependent: :destroy
 end

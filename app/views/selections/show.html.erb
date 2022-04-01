@@ -7,7 +7,7 @@
       <%= link_to "Retourner à la liste des sélections", selections_path %>
       <%= link_to "Trouver et ajouter des restaurants à la selection", results_path(selection_id: @selection.id) %>
   </div>
-  
+
   <div>
     <h2>Restaurants selectionnés</h2>
     Restaurant card
@@ -51,6 +51,8 @@
       <% end %>
     </div>
 
+
+    Fetch method in selection_controller, which send emails to each guest to guest
     <button>Envoyer les invtations</button>
 
   <div>

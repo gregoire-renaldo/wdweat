@@ -13,14 +13,19 @@ export default class extends Controller {
   // create a restaurant, from front, to action in restaurant controller
 
   addRestaurant(e) {
+    console.log('stimulus addRestaurant')
+    console.log(e.target)
     e.preventDefault()
-    console.log('in get stimulus submit')
-    // const target = this.listTarget
+    const queryString = window.location.search;
+    console.log('queryString',queryString)
+    const urlParams = new URLSearchParams(queryString);
+    const selection_id = urlParams.get('selection_id')
+    console.log(selection_id);
 
-    // const query = this.searchInputTarget.value
     // const place = this.searchPlaceTarget.value
-
-    fetch(`/search?term=${query}&location=${place}`,{ method: "POST",
+    const restaurantId = e.target.dataset.restaurantid
+    console.log(restaurantId)
+    fetch(`/restaurants?id=${restaurantId}&selection_id=${selection_id}`,{ method: "POST",
           // body:JSON.stringify(query)
         }).then(function(response) {
         response.json()

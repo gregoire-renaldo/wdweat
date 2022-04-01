@@ -40,8 +40,8 @@ export default class extends Controller {
       .then(function(response) {
         response.json()
         .then(function(data) {
-          console.log(data);
-          console.log(target);
+          // console.log(data);
+          // console.log(target);
 
           target.innerHTML = ''
           data.map(obj => {
@@ -51,16 +51,16 @@ export default class extends Controller {
             target.insertAdjacentHTML('beforeend',`<h1>Nous n'avons pas de résultats pour votre recherche</h1>`)
           } else {
             data.forEach((element,index) => {
-                console.log(index)
+
                 target.insertAdjacentHTML('beforeend', `
-                  <div  class="card " style="width: 18rem;margin-bottom:20px;">
+                  <div class="card " style="width: 18rem;margin-bottom:20px;">
                     <img class="card-img-top card-image" src=${element.image_url} alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title">${element.name}</h5>
                       <p class="card-text">Prix: ${element.price}</p>
                       <p class="card-text">Note: ${element.rating}</p>
                       <a href="${element.url}" target="blank" class="btn btn-primary">En savoir plus</a>
-                      <a href="#" class="btn btn-secondary">Ajouter à ma sélection de restaurants</a>
+                      <button data-restaurantId="${element.id}"  data-action="click->crud-restaurants#addRestaurant" class="btn btn-secondary">Ajouter à ma sélection de restaurants</button>
                     </div>
                   </div>
                 `)

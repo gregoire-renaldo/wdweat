@@ -68,11 +68,11 @@ Rails.application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :user_name            => ENV['MAIL_PROD_USER'],
-    :password             => ENV['MAIL_PASSWORD'],
+    :password             => ENV['MAIL_PROD_PASSWORD'],
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
-  
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.

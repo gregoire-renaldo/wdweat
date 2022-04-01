@@ -40,8 +40,8 @@ export default class extends Controller {
       .then(function(response) {
         response.json()
         .then(function(data) {
-          console.log(data);
-          console.log(target);
+          // console.log(data);
+          // console.log(target);
 
           target.innerHTML = ''
           data.map(obj => {
@@ -50,8 +50,8 @@ export default class extends Controller {
           if (data.length === 0 ) {
             target.insertAdjacentHTML('beforeend',`<h1>Nous n'avons pas de résultats pour votre recherche</h1>`)
           } else {
-            data.forEach(element => {
-                // console.log(element)
+            data.forEach((element,index) => {
+
                 target.insertAdjacentHTML('beforeend', `
                   <div class="card " style="width: 18rem;margin-bottom:20px;">
                     <img class="card-img-top card-image" src=${element.image_url} alt="Card image cap">
@@ -60,6 +60,7 @@ export default class extends Controller {
                       <p class="card-text">Prix: ${element.price}</p>
                       <p class="card-text">Note: ${element.rating}</p>
                       <a href="${element.url}" target="blank" class="btn btn-primary">En savoir plus</a>
+                      <button data-restaurantId="${element.id}"  data-action="click->crud-restaurants#addRestaurant" class="btn btn-secondary">Ajouter à ma sélection de restaurants</button>
                     </div>
                   </div>
                 `)
@@ -97,6 +98,7 @@ export default class extends Controller {
                       <p class="card-text">Prix: ${data.price}</p>
                       <p class="card-text">Note: ${data.rating}</p>
                       <a href="${data.url}" target="blank" class="btn btn-primary">En savoir plus</a>
+                      <button data-restaurantId="${data.id}"  data-action="click->crud-restaurants#addRestaurant" class="btn btn-secondary">Ajouter à ma sélection de restaurants</button>
                     </div>
                   </div>
                 `)

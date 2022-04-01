@@ -4,8 +4,19 @@ Rails.application.routes.draw do
 
   root :to => "pages#home"
 
-   get 'results', to: 'pages#results'
-   post '/search', to: 'yelp#search'
-   post '/search_random', to: 'yelp#search_random'
+  get 'results', to: 'pages#results'
+  post '/search', to: 'yelp#search'
+  post '/search_random', to: 'yelp#search_random'
+
+  # get "selections", to: "selections#index"
+  # get "selections/new", to: "selections#new"
+  # post "selections", to: "selections#create"
+  resources :selections, only: [ :index, :show ] do
+    resources :guests, only: [:create]
+  end
+  resources :guests, only: [:destroy]
+
+  resources :restaurants
+
 
 end

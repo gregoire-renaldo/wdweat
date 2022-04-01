@@ -1,0 +1,68 @@
+<%= @selection.id %>
+<%= @selection.user_id %>
+<%= @selection.name %>
+
+<div class="container">
+  <div class="row">
+      <%= link_to "Retourner à la liste des sélections", selections_path %>
+      <%= link_to "Trouver et ajouter des restaurants à la selection", results_path(selection_id: @selection.id) %>
+
+  </div>
+</div>
+
+<div>
+  <h2>Restaurants selectionnés</h2>
+  Restaurant card
+  score vote restaurant
+  <div class="row justify-content-around">
+    <% @selection.restaurants.each do |restaurant| %>
+      <div class="card " style="width: 18rem;margin-bottom:20px;">
+        <img class="card-img-top card-image" src=<%= restaurant.image_url %> alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= restaurant.name %></h5>
+          <p class="card-text">Prix: <%= restaurant.price %></p>
+          <p class="card-text">Note: <%= restaurant.rating %></p>
+          <a href="<%= restaurant.url %>" target="blank" class="btn btn-primary">En savoir plus</a>
+          <p>score</p>
+          <%= link_to "Delete #{restaurant.name}",
+           restaurant_path(restaurant, selection_id: @selection.id),
+           method: :delete,
+           data: { confirm: "Are you sure?" }%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div>
+<%# comme une review  %>
+ <%# <%# t.string "name"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "selection_id", null: false %>
+
+  <h2>Invités </h2>
+  <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.button :submit %>
+<% end %>
+
+<div id="guests">
+  <% if @selection.guests.blank? %>
+    Commencer à ajouter des invités <%= @selection.name %>
+  <% else %>
+    <% @selection.guests.each do |guest| %>
+      <p id="guest-<%= guest.id %>"><%= guest.name %> <%= guest.email %></p>
+      <%= link_to "Delete", guest_path(guest, selection_id: @selection.id), method: :delete, remote: true %>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+<button>Envoyer les invtations</button>
+</div>
+
+</div>

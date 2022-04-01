@@ -1,14 +1,17 @@
 <div class="container">
   <div data-controller="refresh-list">
 
-  <h2 class="mt-3">Cherchez un restaurant en entrant un type de nourriture et un lieux</h2>
+<%=params%>
+  <%= link_to 'Voir ma liste', selection_path(params[:selection_id]) %>
+
+  <h2 class="mt-3">Cherchez un restaurant en entrant un type de nourriture et un lieux, puis ajoutez le à votre sélection</h2>
     <form>
       <div class="row mt-5">
         <div class="col">
-          <input type="text" class="mb-2 form-control " placeholder="Type de cuisine" data-refresh-list-target="searchInput">
+          <input value="thai" type="text" class="mb-2 form-control " placeholder="Type de cuisine" data-refresh-list-target="searchInput">
         </div>
         <div class="col">
-          <input  type="text" class="form-control" placeholder="Location" data-refresh-list-target="searchPlace" required>
+          <input  value="bordeaux" type="text" class="form-control" placeholder="Location" data-refresh-list-target="searchPlace" required>
         </div>
       </div>
       <div>
@@ -31,7 +34,7 @@
     </div>
 
 
-      <div class="" >
+      <div class="" data-controller="crud-restaurants" >
         <!-- [...] -->
         <div class="row justify-content-around" data-refresh-list-target="list"></div>
       </div>

@@ -34,15 +34,12 @@ export default class extends Controller {
     const query = this.searchInputTarget.value
     const place = this.searchPlaceTarget.value
 
-    fetch(`/search?term=${query}&location=${place}`,{ method: "POST",
-          // body:JSON.stringify(query)
-        })
+    fetch(`/search?term=${query}&location=${place}`,{ method: "POST"})
       .then(function(response) {
         response.json()
         .then(function(data) {
           // console.log(data);
           // console.log(target);
-
           target.innerHTML = ''
           data.map(obj => {
             obj.image_url === "" ?  obj.image_url = "https://eatdrinkplay.com/wp-content/uploads/2015/11/IMG_5077-e1447640039980.jpg" : obj.image_url

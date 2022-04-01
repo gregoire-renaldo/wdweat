@@ -28,3 +28,5 @@ empecher autre utilisateaur loggé de modifier list qui n'est pas la sienne
 if invtations envoyées, bloquer l'ajout de restaus
 
 validations model!!
+
+pop up : restaus ajouté, voir la liste ? continuer à ajouter des restaus ?

@@ -1,5 +1,5 @@
 class SelectionsController < ApplicationController
-
+  skip_before_action :authenticate_user!, only: :show
   def new
     @selection = Selection.new # needed to instantiate the form_for
   end
@@ -21,6 +21,14 @@ class SelectionsController < ApplicationController
 
   def show
     @selection = Selection.find(params[:id])
+    @guest = Guest.new
+  end
+
+  def destroy
+    @selection = Selection.find(params[:id])
+    @selection.destroy
+
+    redirect_to selections_path
   end
 
   private

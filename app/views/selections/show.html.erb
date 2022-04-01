@@ -25,7 +25,6 @@
           <a href="<%= restaurant.url %>" target="blank" class="btn btn-primary">En savoir plus</a>
           <p>score</p>
           <%= link_to "Delete #{restaurant.name}",
-
            restaurant_path(restaurant, selection_id: @selection.id),
            method: :delete,
            data: { confirm: "Are you sure?" }%>
@@ -37,6 +36,33 @@
 
 
 <div>
-  <h2>Invités 1 : nom</h2>
-  invité
+<%# comme une review  %>
+ <%# <%# t.string "name"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "selection_id", null: false %>
+
+  <h2>Invités </h2>
+  <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.button :submit %>
+<% end %>
+
+<div id="guests">
+  <% if @selection.guests.blank? %>
+    Commencer à ajouter des invités <%= @selection.name %>
+  <% else %>
+    <% @selection.guests.each do |guest| %>
+      <p id="guest-<%= guest.id %>"><%= guest.name %> <%= guest.email %></p>
+      <%= link_to "Delete", guest_path(guest, selection_id: @selection.id), method: :delete, remote: true %>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+<button>Envoyer les invtations</button>
+</div>
+
 </div>

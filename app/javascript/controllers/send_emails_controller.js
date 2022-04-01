@@ -22,7 +22,7 @@ export default class extends Controller {
     console.log("emails", emails.join('&'))
     fetch(`/send_emails_to_guests?${params}`, {method: "POST"})
       .then(function(response) {
-        response.json() })
+        console.log(response) })
       .catch(function(error) {
           console.log('Fetch Error:', error);
         });

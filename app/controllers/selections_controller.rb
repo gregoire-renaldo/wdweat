@@ -1,5 +1,7 @@
 class SelectionsController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
+
+
   def new
     @selection = Selection.new # needed to instantiate the form_for
   end

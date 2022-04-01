@@ -30,3 +30,6 @@ if invtations envoyées, bloquer l'ajout de restaus
 validations model!!
 
 pop up : restaus ajouté, voir la liste ? continuer à ajouter des restaus ?
+
+
+index selection ajouter restaus

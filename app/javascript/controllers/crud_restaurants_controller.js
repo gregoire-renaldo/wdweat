@@ -27,14 +27,7 @@ export default class extends Controller {
     console.log(restaurantId)
     fetch(`/restaurants?id=${restaurantId}&selection_id=${selection_id}`,{ method: "POST",
           // body:JSON.stringify(query)
-        }).then(function(response) {
-        response.json()
-        .then(function(data) {
-          console.log(data);
-
-
-        });
-      })
+        }).then(alert('restaurant ajouté'))
         .catch(function(error) {
           console.log('Fetch Error:', error);
         });

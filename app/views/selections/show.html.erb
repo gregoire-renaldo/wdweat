@@ -24,6 +24,11 @@
           <p class="card-text">Note: <%= restaurant.rating %></p>
           <a href="<%= restaurant.url %>" target="blank" class="btn btn-primary">En savoir plus</a>
           <p>score</p>
+          <%= link_to "Delete #{restaurant.name}",
+
+           restaurant_path(restaurant, selection_id: @selection.id),
+           method: :delete,
+           data: { confirm: "Are you sure?" }%>
         </div>
       </div>
     <% end %>

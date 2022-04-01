@@ -17,14 +17,24 @@ class YelpController < ApplicationController
     {content_type: :json, accept: :json, Authorization: ENV["API_KEY"]}
 
     @restaurants_info = JSON.parse(@response.body)["businesses"]
+    @markers = []
+    @restaurants_info.each do |restaurant|
+      @markers << restaurant["coordinates"]
+    end
+    puts "markers"
 
+    puts @markers
+
+    #  @markers = @flats.geocoded.map do |flat|
+    #   {
+    #     lat: flat.latitude,
+    #     lng: flat.longitude
+    #   }
+    # end
     respond_to do |format|
       # format.html # show.html.erb
       format.json {
         if @restaurants_info
-          #  @cuisines = RestClient.get "https://developers.zomato.com/api/v2.1/cuisines?restaurants_id=#{@restaurants_info["id"]}",
-          #  {content_type: :json, accept: :json, "user-key": ENV["API_KEY"]}
-          #  @restaurants_info["cuisines"] = JSON.parse(@cuisines.body)["cuisines"]
           render json: @restaurants_info
         else
           render json: { message: "No business, error: 404" }

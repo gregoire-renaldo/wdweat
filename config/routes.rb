@@ -11,10 +11,13 @@ Rails.application.routes.draw do
   # get "selections", to: "selections#index"
   # get "selections/new", to: "selections#new"
   # post "selections", to: "selections#create"
+  resources :selections, only: [:new, :create]
   resources :selections, only: [ :index, :show ] do
     resources :guests, only: [:create]
   end
+  post "send_emails_to_guests", to: "guests#send_emails_to_guests"
   resources :guests, only: [:destroy]
+
 
   resources :restaurants
 

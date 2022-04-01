@@ -1,5 +1,6 @@
 
 class GuestsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
     @selection = Selection.find(params[:selection_id])
@@ -19,6 +20,15 @@ class GuestsController < ApplicationController
     @guest.destroy
     redirect_to selection_path(@selection)
     # redirect_to guests_path
+    end
+
+    def send_emails_to_guests
+      puts params
+      restaurants = params[:restaurants]
+      guest = params[:guests]
+
+      # InvitationMailer.with(invitation: @invitation).new_invitation_email.deliver_now
+      InvitationMailer.new_invitation_email.deliver_now
     end
 
 

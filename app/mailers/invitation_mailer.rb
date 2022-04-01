@@ -1,9 +1,10 @@
 class InvitationMailer < ApplicationMailer
   def new_invitation_email
-    @selection = params[:selection]
+    # @selection = params[:selection]
 
 
       # guest_email
-    mail(to: "gregoire.renaldo@gmail.com", subject: "You got a new order!")
+      puts 'in new_invitation_email'
+    mail(to: "gregoire.renaldo@gmail.com", subject: "You got an invitation!")
   end
 end

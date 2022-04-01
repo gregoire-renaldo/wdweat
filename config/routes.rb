@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   resources :selections, only: [ :index, :show ] do
     resources :guests, only: [:create]
   end
+  post "send_emails_to_guests", to: "guests#send_emails_to_guests"
   resources :guests, only: [:destroy]
+
 
   resources :restaurants
 

@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   # get "selections/new", to: "selections#new"
   # post "selections", to: "selections#create"
 
+  resources :restaurants
+
 end

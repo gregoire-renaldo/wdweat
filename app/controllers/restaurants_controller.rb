@@ -5,30 +5,27 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    # t.string "name"
-    # t.string "price"
-    # t.integer "rating"
-    # t.string "image_url"
-    # t.string "url"
-    # selection_id
-
-    puts params
-    puts params[:id]
+    # créer un dossier service,  avec les methodes RestClient ?
     id = params[:id]
-    selection_id = params[:selection_id]
-
+    puts params[:selection_id]
+    selection_id =  params[:selection_id]
     @response =  RestClient.get "https://api.yelp.com/v3/businesses/#{id}",
     {content_type: :json, accept: :json, Authorization: ENV["API_KEY"]}
-    puts "@response"
 
     @restaurants_info = JSON.parse(@response.body)
-    puts "@restaurants_info"
-    puts @restaurants_info
-
-    @restaurant = Restaurant.new(name: @restaurants_info["name"],price: @restaurants_info["price"],rating: @restaurants_info["rating"], image_url: @restaurants_info["image_url"],url: @restaurants_info["url"], selection_id: 25)
+    @restaurant = Restaurant.new(name: @restaurants_info["name"],price: @restaurants_info["price"],rating: @restaurants_info["rating"], image_url: @restaurants_info["image_url"],url: @restaurants_info["url"], selection_id: selection_id)
     @restaurant.save
-
     # thing to do in case of error
+  end
+
+  def destroy
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.destroy
+    puts params
+    selection = params[:selection_id]
+
+    # no need for app/views/restaurants/destroy.html.erb
+    redirect_to selection_path(selection)
   end
 
 

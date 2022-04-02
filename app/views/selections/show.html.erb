@@ -33,25 +33,34 @@
   </div>
 
   <div data-controller="send-emails">
-    <h2>Invités </h2>
-    <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
-      <%= f.input :name %>
-      <%= f.input :email %>
-      <%= f.button :submit %>
-    <% end %>
 
     <div id="guests">
+    <h2>Invités </h2>
       <% if @selection.guests.blank? %>
-        Commencer à ajouter des invités <%= @selection.name %>
+        Commencer à ajouter des invités à la sélection <%= @selection.name %>
+        <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
+          <%= f.input :name %>
+          <%= f.input :email %>
+          <%= f.button :submit, "Ajouter un invité", class: "mt-2" %>
+        <% end %>
       <% else %>
+          <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
+          <%= f.input :name %>
+          <%= f.input :email %>
+          <%= f.button :submit, "Ajouter un invité", class: "mt-2" %>
+        <% end %>
+        <div class="guests-list">
         <% @selection.guests.each do |guest| %>
-          <p data-send-emails-target="email" id="guest-<%= guest.id %>"><%= guest.name %> <%= guest.email %></p>
+          <p  id="guest-<%= guest.id %>"><%= guest.name %> <%= guest.email %></p>
           <p data-send-emails-target="email"><%= guest.email %></p>
           <%= link_to "Delete", guest_path(guest, selection_id: @selection.id), method: :delete, remote: true %>
         <% end %>
+        </div>
       <% end %>
-      <button data-action="send-emails#sendEmails">Envoyer les invtations</button>
     </div>
+
+
+      <button data-action="send-emails#sendEmails">Envoyer les invitations</button>
 
 
     Fetch method in selection_controller, which send emails to each guest to guest

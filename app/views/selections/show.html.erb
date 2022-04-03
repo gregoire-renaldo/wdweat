@@ -4,12 +4,12 @@
 
 <div class="container" data-controller="send-emails" data-send-emails-selection-value="<%= @selection.id %>">
   <div class="row" >
-      <%= link_to "Retourner à la liste des sélections", selections_path %>
-      <%= link_to "Trouver et ajouter des restaurants à la selection", results_path(selection_id: @selection.id) %>
+      <%= link_to "Retourner à la liste des sélections", selections_path, class: "btn btn-primary" %>
+      <%= link_to "Ajouter des restaurants à la selection", results_path(selection_id: @selection.id), class: "btn btn-primary mt-2 mb-2" %>
   </div>
 
   <div>
-    <h2>Restaurants selectionnés</h2>
+    <h2 class="text-center">Restaurants selectionnés : </h2>
     Restaurant card
     score vote restaurant
     <div class="row justify-content-around">
@@ -22,10 +22,11 @@
             <p class="card-text">Note: <%= restaurant.rating %></p>
             <a href="<%= restaurant.url %>" target="blank" class="btn btn-primary">En savoir plus</a>
             <p>score</p>
-            <%= link_to "Delete #{restaurant.name}",
+            <%= link_to "Supprimer #{restaurant.name}",
                         restaurant_path(restaurant, selection_id: @selection.id),
                         method: :delete,
-                        data: { confirm: "Are you sure?" } %>
+                        data: { confirm: "Êtes-vous sûr ?" },
+                        class: "btn btn-danger" %>
           </div>
         </div>
       <% end %>

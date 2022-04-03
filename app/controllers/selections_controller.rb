@@ -33,6 +33,11 @@ class SelectionsController < ApplicationController
     redirect_to selections_path
   end
 
+  def score
+    
+  end
+  
+
   private
 
   def selection_params

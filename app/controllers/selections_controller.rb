@@ -11,7 +11,7 @@ class SelectionsController < ApplicationController
     @selection.user_id = current_user.id
 
     if @selection.save
-      redirect_to selections_path
+      redirect_to selection_path(@selection)
     else
       render "new"
     end

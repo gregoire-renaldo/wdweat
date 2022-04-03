@@ -33,3 +33,7 @@ pop up : restaus ajouté, voir la liste ? continuer à ajouter des restaus ?
 
 
 index selection ajouter restaus
+
+dropdown restaus
+
+add map to index selection

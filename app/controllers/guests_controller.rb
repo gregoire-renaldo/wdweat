@@ -31,8 +31,6 @@ class GuestsController < ApplicationController
       InvitationMailer.new_invitation_email.deliver_now
     end
 
-
-
   private
 
   def guest_params

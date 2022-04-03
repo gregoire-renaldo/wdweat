@@ -2,11 +2,8 @@ import { Controller } from "stimulus"
 import mapboxgl from "!mapbox-gl"
 
 export default class extends Controller {
-  static values = {
-    apiKey: String,
-  }
+  static values = { apiKey: String }
   static targets = [  "list", "searchInput", "searchPlace","searchPlace2","containerMap" ]
-
 
   connect() {
     // console.log(this.containerMap);
@@ -22,9 +19,8 @@ export default class extends Controller {
 
     this.map = new mapboxgl.Map({
       container: this.containerMapTarget,
-      style: "mapbox://styles/mapbox/streets-v10"
+      style: "mapbox://styles/robertdupont/cl1j14ur0000414n6ucz2ps2m"
     })
-
   }
 
 
@@ -77,21 +73,20 @@ export default class extends Controller {
               const marker = {}
               marker.lat = el.coordinates.latitude
               marker.lng = el.coordinates.longitude
+              marker.name = el.name
               coordinates.push(marker)
             })
             console.log('coordinates',coordinates)
             console.log( 'map',el.map)
-
             const bounds = new mapboxgl.LngLatBounds()
             coordinates.forEach((marker) => {
-              // console.log('salut', new mapboxgl.Marker().setLngLat([ marker.lng, marker.lat ] ))
-            new mapboxgl.Marker()
-              .setLngLat([ marker.lng, marker.lat ])
-              .addTo(el.map)
-
-              bounds.extend([ marker.lng, marker.lat ])
-              el.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0.7 })
-
+              const popup = new mapboxgl.Popup().setHTML(`<p>Salut ${marker.name}</p>`)
+              new mapboxgl.Marker()
+                .setLngLat([ marker.lng, marker.lat ])
+                .setPopup(popup)
+                .addTo(el.map)
+                bounds.extend([ marker.lng, marker.lat ])
+                el.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0.7 })
             });
 
 

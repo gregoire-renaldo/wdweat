@@ -4,13 +4,7 @@ export default class extends Controller {
   static targets = [  ]
 
   connect() {
-    // console.log(this.element);
-    // console.log(this.listTarget);
-    // console.log(this.searchInputTarget);
-    // console.log(this.searchInputPlace);
   }
-
-  // create a restaurant, from front, to action in restaurant controller
 
   addRestaurant(e) {
     console.log('stimulus addRestaurant')
@@ -21,12 +15,9 @@ export default class extends Controller {
     const urlParams = new URLSearchParams(queryString);
     const selection_id = urlParams.get('selection_id')
     console.log(selection_id);
-
-    // const place = this.searchPlaceTarget.value
     const restaurantId = e.target.dataset.restaurantid
     console.log(restaurantId)
     fetch(`/restaurants?id=${restaurantId}&selection_id=${selection_id}`,{ method: "POST",
-          // body:JSON.stringify(query)
         }).then(alert('restaurant ajouté'))
         .catch(function(error) {
           console.log('Fetch Error:', error);

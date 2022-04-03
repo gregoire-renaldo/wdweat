@@ -1,4 +1,46 @@
-<h1>
-salut
-    <%=@selection_restaurants%>
-</h1>
+
+<style>
+.wrapper {
+  width: 500px;
+  margin-bottom: 50px;
+  border:solid 1px gray;
+
+  }
+.center-text{ text-align:center;}
+.card {
+  display: block;
+  width:300px;
+  margin:0 auto !important;
+  margin-bottom: 25px
+  border:solid 1px gray;
+}
+.card p {
+margin: 0 auto;
+}
+.image-card img {height:200px; width:auto}
+.card-button {
+  margin-bottom:30px;
+}
+
+</style>
+
+
+<div class="wrapper">
+  <h1 class="center-text">Voter pour le restaurant de votre choix</h1>
+  <a href="http://localhost:3000/selections/<%=@selection.id%>">
+  <h2 class="center-text">Voir la sélection</h2>
+  </a>
+
+      <%@selection_restaurants.each do |restaurant|%>
+      <div class="card" >
+        <div class="image-card">
+        <img src="<%=restaurant.image_url%>" alt="">
+        </div>
+        <p><%=restaurant.name%></p>
+        <p><%=restaurant.price%></p>
+        <p><%=restaurant.rating%></p>
+        <button class="card-button">Voter pour ce restaurant</button>
+      </div>
+      <%end%>
+
+</div>

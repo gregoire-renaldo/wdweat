@@ -4,14 +4,10 @@ ajouter adresse sur carte
 
 loader pendant la recherche
 
-restaurant create ? after create, gérer le retour du fetch api
-
 service pour les requetes yelp
 
 limiter le nombre de restaus à choisir ?
 delete restaus dans sélection
-
-map avec results ?
 
 systeme de filtre
 
@@ -35,5 +31,3 @@ pop up : restaus ajouté, voir la liste ? continuer à ajouter des restaus ?
 index selection ajouter restaus
 
 dropdown restaus
-
-add map to index selection

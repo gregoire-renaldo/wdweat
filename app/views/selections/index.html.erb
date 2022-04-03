@@ -7,17 +7,30 @@
 
   <div>
   <h2>Mes sélections</h2>
-    <ul>
+
       <% @selections&.each do |selection| %>
-        <%= link_to(selection_path(selection)) do %>
-          <li><%= selection.name %> <%= selection.date.strftime('%d/%m/%y %H:%M') %></li>
-        <% end %>
-          Nombre de restaurants selectionnés <%= selection.restaurants.count %>
-          <%= link_to "Delete #{selection.name}",
-              selection_path(selection),
-              method: :delete,
-              data: { confirm: "Are you sure?" } %>
+              <%= link_to(selection_path(selection)) do %>
+      <div class="wrapper-selections container">
+
+            <div>
+                <%= selection.name %> <%= selection.date.strftime('%d/%m/%y %H:%M') %></li>
+              <% end %>
+            </div>
+            <div>
+              Nombre de restaurants selectionnés <%= selection.restaurants.count %>
+            </div>
+            <div>
+              <%= link_to "Supprimer #{selection.name}",
+                  selection_path(selection),
+                  method: :delete,
+                  data: { confirm: "Êtes-vous sûr ?" },
+                  class: "btn btn-danger" %>
+            </div>
+
+
+      </div>
       <% end %>
-    </ul>
+
+
   </div>
 </div>

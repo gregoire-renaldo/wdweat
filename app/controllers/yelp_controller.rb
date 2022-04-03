@@ -17,12 +17,19 @@ class YelpController < ApplicationController
     {content_type: :json, accept: :json, Authorization: ENV["API_KEY"]}
 
     @restaurants_info = JSON.parse(@response.body)["businesses"]
+
     @markers = []
     @restaurants_info.each do |restaurant|
       @markers << restaurant["coordinates"]
     end
-    puts "markers"
 
+    @markers = @markers.map do |marker|
+      {
+        lat:marker['latitude'],
+        lng:marker['longitude']
+      }
+    end
+    puts "markers"
     puts @markers
 
     #  @markers = @flats.geocoded.map do |flat|

@@ -1,15 +1,34 @@
 import { Controller } from "stimulus"
+import mapboxgl from "!mapbox-gl"
 
 export default class extends Controller {
-  static targets = [  "list", "searchInput", "searchPlace","searchPlace2" ]
+  static values = {
+    apiKey: String,
+  }
+  static targets = [  "list", "searchInput", "searchPlace","searchPlace2","containerMap" ]
+
 
   connect() {
+    // console.log(this.containerMap);
+    console.log('cont map',this.containerMapTarget);
+    console.log('api key',this.apiKeyValue);
     console.log(this.element);
-
     console.log(this.listTarget);
     console.log(this.searchInputTarget);
     console.log(this.searchInputPlace);
+
+    // mapboxgl.accessToken = this.apiKeyValue
+    mapboxgl.accessToken = "pk.eyJ1Ijoicm9iZXJ0ZHVwb250IiwiYSI6ImNsMWkzd3I4dDBnaGQzam4zZnk5dnV6bDgifQ.IDerL2K28FfdFy2eY6rA4A"
+
+    this.map = new mapboxgl.Map({
+      container: this.containerMapTarget,
+      style: "mapbox://styles/mapbox/streets-v10"
+    })
+
   }
+
+
+
   // yelp is not accepting CORS, so the server has to do the calls,
   // here #search in YelpController
   //  https://tiffnuugen.github.io/the_de_facto_guide_to_using_the_yelp_api
@@ -18,21 +37,10 @@ export default class extends Controller {
     e.preventDefault()
     console.log('in get stimulus submit')
     const target = this.listTarget
-    // launch loader ?
-    target.insertAdjacentHTML('beforeend', `
-    <div class="wrapper">
-        <span class="circle circle-1"></span>
-        <span class="circle circle-2"></span>
-        <span class="circle circle-3"></span>
-        <span class="circle circle-4"></span>
-        <span class="circle circle-5"></span>
-        <span class="circle circle-6"></span>
-        <span class="circle circle-7"></span>
-        <span class="circle circle-8"></span>
-        </div>
-        `)
     const query = this.searchInputTarget.value
     const place = this.searchPlaceTarget.value
+
+    const el =this
 
     fetch(`/search?term=${query}&location=${place}`,{ method: "POST"})
       .then(function(response) {
@@ -48,7 +56,6 @@ export default class extends Controller {
             target.insertAdjacentHTML('beforeend',`<h1>Nous n'avons pas de résultats pour votre recherche</h1>`)
           } else {
             data.forEach((element,index) => {
-
                 target.insertAdjacentHTML('beforeend', `
                   <div class="card " style="width: 18rem;margin-bottom:20px;">
                     <img class="card-img-top card-image" src=${element.image_url} alt="Card image cap">
@@ -62,6 +69,29 @@ export default class extends Controller {
                   </div>
                 `)
             });
+
+            // markers for map
+            const coordinates = []
+            data.forEach(el => {
+              console.log('el',el.coordinates)
+              const marker = {}
+              marker.lat = el.coordinates.latitude
+              marker.lng = el.coordinates.longitude
+              coordinates.push(marker)
+            })
+            console.log('coordinates',coordinates)
+
+            console.log( 'map',el.map)
+
+            coordinates.forEach((marker) => {
+              // console.log('salut', new mapboxgl.Marker().setLngLat([ marker.lng, marker.lat ] ))
+            new mapboxgl.Marker()
+              .setLngLat([ marker.lng, marker.lat ])
+              .addTo(el.map)
+            });
+
+
+
           }
         });
       })

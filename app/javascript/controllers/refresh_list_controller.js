@@ -80,15 +80,21 @@ export default class extends Controller {
               coordinates.push(marker)
             })
             console.log('coordinates',coordinates)
-
             console.log( 'map',el.map)
 
+            const bounds = new mapboxgl.LngLatBounds()
             coordinates.forEach((marker) => {
               // console.log('salut', new mapboxgl.Marker().setLngLat([ marker.lng, marker.lat ] ))
             new mapboxgl.Marker()
               .setLngLat([ marker.lng, marker.lat ])
               .addTo(el.map)
+
+              bounds.extend([ marker.lng, marker.lat ])
+              el.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0.7 })
+
             });
+
+
 
 
 

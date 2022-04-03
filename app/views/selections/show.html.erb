@@ -12,16 +12,20 @@
     <h2 class="text-center">Restaurants selectionnés : </h2>
     Restaurant card
     score vote restaurant
-    <div class="row justify-content-around">
+    <div class="row justify-content-around" data-controller="vote">
       <% @selection.restaurants.each do |restaurant| %>
-        <div class="card" style="width: 18rem;margin-bottom:20px;">
+        <div class="card" style="width: 18rem;margin-bottom:20px;"
+          data-restaurantId="<%=restaurant.id%>"
+
+        >
           <img class="card-img-top card-image" src=<%= restaurant.image_url %> alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%= restaurant.name %></h5>
             <p class="card-text">Prix: <%= restaurant.price %></p>
             <p class="card-text">Note: <%= restaurant.rating %></p>
-            <a href="<%= restaurant.url %>" target="blank" class="btn btn-primary">En savoir plus</a>
-            <p>score</p>
+            <p>vote: <%= restaurant.score %></p>
+            <button data-action="click->vote#votePlus" class="btn btn-secondary mb-1">Voter pour ce restau</button>
+            <a href="<%= restaurant.url %>" target="blank" class="btn btn-primary  mb-1">En savoir plus</a>
             <%= link_to "Supprimer #{restaurant.name}",
                         restaurant_path(restaurant, selection_id: @selection.id),
                         method: :delete,
@@ -31,6 +35,7 @@
         </div>
       <% end %>
     </div>
+
   </div>
 
   <div >
@@ -50,6 +55,7 @@
           <%= f.input :email %>
           <%= f.button :submit, "Ajouter un invité", class: "mt-2" %>
         <% end %>
+
         <div class="guests-list">
         <% @selection.guests.each do |guest| %>
           <p  id="guest-<%= guest.id %>"><%= guest.name %> <%= guest.email %></p>
@@ -59,8 +65,7 @@
         </div>
       <% end %>
     </div>
-      <button data-action="send-emails#sendEmails">Envoyer les invitations</button>
-    Fetch method in selection_controller, which send emails to each guest to guest
+      <button class="mb-5" data-action="send-emails#sendEmails">Envoyer les invitations</button>
 
   <div>
 </div>

@@ -28,11 +28,19 @@ class RestaurantsController < ApplicationController
     redirect_to selection_path(selection)
   end
 
+  def score
+    puts 'in score'
+    puts params[:id]
+    restaurant = Restaurant.find(params[:id]).vote
+    restaurant.save
+    r.save
+  end
+
 
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :price, :rating, :image_url, :url, :selection_id)
+    params.require(:restaurant).permit(:name, :price, :rating, :image_url, :url, :selection_id, :score)
   end
 
 end

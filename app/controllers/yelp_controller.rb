@@ -8,8 +8,8 @@ class YelpController < ApplicationController
     puts"params"
     puts params
     puts params[:term]
-    term = params[:term].trim
-    location = params[:location].trim
+    term = params[:term]
+    location = params[:location]
 
     @response =  RestClient.get "https://api.yelp.com/v3/businesses/search?term=#{term}&location=#{location}",
     {content_type: :json, accept: :json, Authorization: ENV["API_KEY"]}

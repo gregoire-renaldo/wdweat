@@ -28,11 +28,16 @@ class GuestsController < ApplicationController
       puts selection
 
       puts 'guest'
-      guests = params[:guests]
+      guests = params[:guests].split(',')
+      puts guests.class
       puts guests
 
       # InvitationMailer.with(invitation: @invitation).new_invitation_email.deliver_now
-      InvitationMailer.new_invitation_email(guests,selection).deliver_now
+      # InvitationMailer.new_invitation_email(email, selection).deliver_now
+      guests.each do |guest|
+        InvitationMailer.new_invitation_email(guest, selection).deliver_now
+      end
+
     end
 
   private

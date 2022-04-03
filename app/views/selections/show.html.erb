@@ -2,8 +2,8 @@
 <%= @selection.user_id %>
 <%= @selection.name %>
 
-<div class="container">
-  <div class="row">
+<div class="container" data-controller="send-emails" data-send-emails-selection-value="<%= @selection.id %>">
+  <div class="row" >
       <%= link_to "Retourner à la liste des sélections", selections_path %>
       <%= link_to "Trouver et ajouter des restaurants à la selection", results_path(selection_id: @selection.id) %>
   </div>
@@ -14,7 +14,7 @@
     score vote restaurant
     <div class="row justify-content-around">
       <% @selection.restaurants.each do |restaurant| %>
-        <div class="card " style="width: 18rem;margin-bottom:20px;">
+        <div class="card" style="width: 18rem;margin-bottom:20px;">
           <img class="card-img-top card-image" src=<%= restaurant.image_url %> alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%= restaurant.name %></h5>
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div data-controller="send-emails">
+  <div >
 
     <div id="guests">
     <h2>Invités </h2>
@@ -58,13 +58,8 @@
         </div>
       <% end %>
     </div>
-
-
       <button data-action="send-emails#sendEmails">Envoyer les invitations</button>
-
-
     Fetch method in selection_controller, which send emails to each guest to guest
 
   <div>
-
 </div>

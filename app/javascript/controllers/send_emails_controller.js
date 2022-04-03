@@ -1,13 +1,18 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [  "email"]
+  static targets = ["email"]
+  // static values = {
+  //   "selection": String
+  // }
+
 
   connect() {
+
     console.log(this.element);
-
+    console.log(this.element.attributes[2].value);
     console.log(this.emailTargets);
-
+    console.log(this.selectionValue);
 
   }
 
@@ -15,12 +20,14 @@ export default class extends Controller {
     console.log(this.emailTargets)
     const emailsFromClient = this.emailTargets
     const emails = []
-    emailsFromClient.forEach(element => {
-      emails.push(element.innerHTML)
+    emailsFromClient.forEach((element,index) => {
+      emails.push(`${element.innerHTML}`)
     });
-    const params = emails.join('&')
-    console.log("emails", emails.join('&'))
-    fetch(`/send_emails_to_guests?${params}`, {method: "POST"})
+    // email-${index}=
+
+    const params_email = emails
+    const param_selection = this.element.attributes[2].value
+    fetch(`/send_emails_to_guests?guests=${params_email}&selection=${param_selection}`, {method: "POST"})
       .then(function(response) {
         console.log(response) })
       .catch(function(error) {

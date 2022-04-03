@@ -13,19 +13,23 @@ class GuestsController < ApplicationController
     end
   end
 
-
-    def destroy
+  def destroy
     @selection = Selection.find(params[:selection_id])
     @guest = Guest.find(params[:id])
     @guest.destroy
     redirect_to selection_path(@selection)
     # redirect_to guests_path
-    end
+  end
 
     def send_emails_to_guests
       puts params
-      restaurants = params[:restaurants]
-      guest = params[:guests]
+      selection = params[:selection]
+      puts 'params selection'
+      puts selection
+
+      puts 'guest'
+      guests = params[:guests]
+      puts guests
 
       # InvitationMailer.with(invitation: @invitation).new_invitation_email.deliver_now
       InvitationMailer.new_invitation_email.deliver_now

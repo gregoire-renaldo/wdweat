@@ -32,7 +32,7 @@ class GuestsController < ApplicationController
       puts guests
 
       # InvitationMailer.with(invitation: @invitation).new_invitation_email.deliver_now
-      InvitationMailer.new_invitation_email.deliver_now
+      InvitationMailer.new_invitation_email(guests,selection).deliver_now
     end
 
   private

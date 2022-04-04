@@ -7,7 +7,7 @@
 
   <div class="row">
     <% @selections&.each do |selection| %>
-    <div class="col-sm-6 mt-2">
+    <div class="col-sm-4 mt-2">
       <div class="card card-selection">
         <div class="card-body">
           <h5 class="card-title"><%= selection.name %>t</h5>
@@ -18,18 +18,17 @@
             <p><%=restaurant.name %></p>
           <%end %>
 
-          <div class="row">
-            <div class="col-4">
+          <div class="row  ">
+            <div class="col">
               <%= link_to(selection_path(selection)) do %>
                   <button class="mb-1 btn btn-primary">Voir ma liste</button>
               <% end %>
-            </div>
-            <div class="col-4">
               <%= link_to(results_path(selection_id: selection.id)) do %>
                   <button class="mb-1 btn btn-secondary">Ajouter des restaux</button>
               <% end %>
             </div>
-            <div class="col-4">
+
+            <div class="">
               <%= link_to "Supprimer",
                               selection_path(selection),
                               method: :delete,

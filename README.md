@@ -19,3 +19,5 @@
 - Modale pour afficher les restaux lors de la sélection
 - Limiter le nombre de restaux à choisir
 - Refacto JS
+- Footer
+- Alertes

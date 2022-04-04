@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # get "selections/new", to: "selections#new"
   # post "selections", to: "selections#create"
   resources :selections, only: [:new, :create]
-  resources :selections, only: [ :index, :show ] do
+  resources :selections, only: [ :index, :show, :destroy ] do
     resources :guests, only: [:create]
   end
 

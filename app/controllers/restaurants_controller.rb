@@ -5,7 +5,6 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    # créer un dossier service,  avec les methodes RestClient ?
     id = params[:id]
     puts params[:selection_id]
     selection_id =  params[:selection_id]
@@ -15,27 +14,27 @@ class RestaurantsController < ApplicationController
     @restaurants_info = JSON.parse(@response.body)
     @restaurant = Restaurant.new(name: @restaurants_info["name"],price: @restaurants_info["price"],rating: @restaurants_info["rating"], image_url: @restaurants_info["image_url"],url: @restaurants_info["url"], selection_id: selection_id)
     @restaurant.save
-    # thing to do in case of error
   end
 
   def destroy
     @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
-    puts params
     selection = params[:selection_id]
-
-    # no need for app/views/restaurants/destroy.html.erb
     redirect_to selection_path(selection)
   end
 
   def score
-    puts 'in score'
-    puts params[:id]
-    restaurant = Restaurant.find(params[:id]).vote
-    restaurant.save
-    r.save
+    restaurant = Restaurant.find(params[:restaurant_id])
+    selection = params[:selection_id]
+    if params[:vote] == 'increment'
+      score = restaurant.score + 1
+      restaurant.update(score: score)
+    elsif params[:vote] == 'decrement'
+      score = restaurant.score - 1
+      restaurant.update(score: score)
+    end
+    redirect_to selection_path(selection)
   end
-
 
   private
 

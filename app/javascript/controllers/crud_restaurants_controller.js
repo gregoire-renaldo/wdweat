@@ -7,8 +7,7 @@ export default class extends Controller {
   }
 
   addRestaurant(e) {
-    console.log('stimulus addRestaurant')
-    console.log(e.target)
+    
     e.preventDefault()
     const queryString = window.location.search;
     console.log('queryString',queryString)

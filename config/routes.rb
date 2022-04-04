@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   post "send_emails_to_guests", to: "guests#send_emails_to_guests"
   resources :guests, only: [:destroy]
 
-  post "restaurant/score", to:"restaurants#score"
-  resources :restaurants
-
+  resources :restaurants do
+    put 'score', to: "restaurants#score"
+  end
 
 end

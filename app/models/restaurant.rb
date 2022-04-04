@@ -3,7 +3,7 @@ class Restaurant < ApplicationRecord
 
   def vote
     self.score += 1
-    
+    save!
   end
 
 end

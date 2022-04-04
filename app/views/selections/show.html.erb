@@ -1,31 +1,32 @@
-<%= @selection.id %>
-<%= @selection.user_id %>
-<%= @selection.name %>
-
 <div class="container" data-controller="send-emails" data-send-emails-selection-value="<%= @selection.id %>">
   <div class="row" >
       <%= link_to "Retourner à la liste des sélections", selections_path, class: "btn btn-primary" %>
       <%= link_to "Ajouter des restaurants à la selection", results_path(selection_id: @selection.id), class: "btn btn-primary mt-2 mb-2" %>
   </div>
-
   <div>
     <h2 class="text-center">Restaurants selectionnés : </h2>
-    Restaurant card
-    score vote restaurant
     <div class="row justify-content-around" data-controller="vote">
       <% @selection.restaurants.each do |restaurant| %>
-        <div class="card" style="width: 18rem;margin-bottom:20px;"
-          data-restaurantId="<%=restaurant.id%>"
-
-        >
+        <div class="card" style="width: 18rem;margin-bottom:20px;">
           <img class="card-img-top card-image" src=<%= restaurant.image_url %> alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%= restaurant.name %></h5>
             <p class="card-text">Prix: <%= restaurant.price %></p>
             <p class="card-text">Note: <%= restaurant.rating %></p>
             <p>vote: <%= restaurant.score %></p>
-            <button data-action="click->vote#votePlus" class="btn btn-secondary mb-1">Voter pour ce restau</button>
+            <%= link_to "Vote +1 ",
+                        restaurant_score_path(restaurant, selection_id: @selection.id, vote: 'increment'),
+                        method: :put,
+                        data: { confirm: "Êtes-vous sûr ?" },
+                        class: "btn btn-secondary" %>
+            <%= link_to "Vote -1 ",
+                        restaurant_score_path(restaurant, selection_id: @selection.id, vote: 'decrement'),
+                        method: :put,
+                        data: { confirm: "Êtes-vous sûr ?" },
+                        class: "btn btn-secondary" %>
+
             <a href="<%= restaurant.url %>" target="blank" class="btn btn-primary  mb-1">En savoir plus</a>
+
             <%= link_to "Supprimer #{restaurant.name}",
                         restaurant_path(restaurant, selection_id: @selection.id),
                         method: :delete,
@@ -35,9 +36,7 @@
         </div>
       <% end %>
     </div>
-
   </div>
-
   <div >
 
     <div id="guests">
@@ -66,6 +65,5 @@
       <% end %>
     </div>
       <button class="mb-5" data-action="send-emails#sendEmails">Envoyer les invitations</button>
-
-  <div>
+    <div>
 </div>

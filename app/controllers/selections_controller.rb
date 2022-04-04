@@ -18,7 +18,7 @@ class SelectionsController < ApplicationController
   end
 
   def index
-    @selections = Selection.all
+    @selections = Selection.all.where(user_id: current_user.id)
   end
 
   def show
@@ -33,7 +33,7 @@ class SelectionsController < ApplicationController
     redirect_to selections_path
   end
 
-  
+
 
 
   private

@@ -12,11 +12,10 @@
 ## To do
 - Loader à ajouter pendant les fetchs
 - Finaliser Devise en paramétrant les emails
+- Tests :-)
 - Front emails
 - Front au global
-- Loader à ajouter pendant les fetchs
 - Améliorer le système de vote: le restreindre à 1 vote par utilisateur
-- Ajouter carte sur la show sélection
-- Modale pour afficher les restaus lors de la sélection
-- Limiter le nombre de restaus à choisir
+- Modale pour afficher les restaux lors de la sélection
+- Limiter le nombre de restaux à choisir
 - Refacto JS

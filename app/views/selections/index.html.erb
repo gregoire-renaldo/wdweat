@@ -1,24 +1,18 @@
-
 <div class="container">
-  <h1>Voir mes sélections, et créer des sélections<br>
-  </h1>
-
+  <h1 class="mt-4 text-center">Voir et créer des sélections</h1>
+  <div class="text-center mb-3">
   <%= link_to 'Créer nouvelle sélection', new_selection_path, class: "btn btn-primary rounded" %>
-
-  <div>
-  <h2>Mes sélections</h2>
-
+  </div>
+    <h2 class="text-center">Mes sélections</h2>
       <% @selections&.each do |selection| %>
-              <%= link_to(selection_path(selection)) do %>
-      <div class="wrapper-selections container">
-
-            <div>
-                <%= selection.name %> <%= selection.date.strftime('%d/%m/%y %H:%M') %></li>
-              <% end %>
-            </div>
-            <div>
-              Nombre de restaurants selectionnés <%= selection.restaurants.count %>
-            </div>
+        <div class="wrapper-selections container">
+            <p>Titre: <%= selection.name %> </p>
+            <p>Date: <%= selection.date.strftime("%d/%m/%y %H:%M") %> </p>
+            <p>Heure: <%= selection.date.strftime("%H:%M") %> </p>
+            <p>Nombre de restaurants selectionnés <%= selection.restaurants.count %></p>
+            <%= link_to(selection_path(selection)) do %>
+              <button class=" mb-1 btn btn-secondary"> Voir la sélection</button>
+            <% end %>
             <div>
               <%= link_to "Supprimer #{selection.name}",
                   selection_path(selection),
@@ -26,11 +20,6 @@
                   data: { confirm: "Êtes-vous sûr ?" },
                   class: "btn btn-danger" %>
             </div>
-
-
-      </div>
+        </div>
       <% end %>
-
-
-  </div>
 </div>

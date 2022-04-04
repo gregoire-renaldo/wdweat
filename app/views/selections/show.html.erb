@@ -7,7 +7,7 @@
     <h2 class="text-center">Restaurants selectionnés : </h2>
     <div class="row justify-content-around" data-controller="vote">
       <% @selection.restaurants.each do |restaurant| %>
-        <div class="card" style="width: 18rem;margin-bottom:20px;">
+        <div class="card card-restaurant" style="width: 18rem;margin-bottom:20px;">
           <img class="card-img-top card-image" src=<%= restaurant.image_url %> alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%= restaurant.name %></h5>
@@ -18,14 +18,14 @@
                         restaurant_score_path(restaurant, selection_id: @selection.id, vote: 'increment'),
                         method: :put,
                         data: { confirm: "Êtes-vous sûr ?" },
-                        class: "btn btn-secondary" %>
+                        class: "mt-1 btn btn-secondary" %>
             <%= link_to "Vote -1 ",
                         restaurant_score_path(restaurant, selection_id: @selection.id, vote: 'decrement'),
                         method: :put,
                         data: { confirm: "Êtes-vous sûr ?" },
-                        class: "btn btn-secondary" %>
+                        class: "mt-1 btn btn-secondary" %>
 
-            <a href="<%= restaurant.url %>" target="blank" class="btn btn-primary  mb-1">En savoir plus</a>
+            <a href="<%= restaurant.url %>" target="blank" class="mt-1 btn btn-primary  mb-1">En savoir plus</a>
 
             <%= link_to "Supprimer #{restaurant.name}",
                         restaurant_path(restaurant, selection_id: @selection.id),
@@ -39,19 +39,20 @@
   </div>
   <div >
 
-    <div id="guests">
+    <div class="text-center" id="guests">
     <h2>Invités </h2>
       <% if @selection.guests.blank? %>
         Commencer à ajouter des invités à la sélection <%= @selection.name %>
         <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
-          <%= f.input :name %>
-          <%= f.input :email %>
+
+          <%= f.input :name, label: 'Nom', label_html: { class: 'red' }%>
+          <%= f.input :email, label: 'Email' %>
           <%= f.button :submit, "Ajouter un invité", class: "mt-2" %>
         <% end %>
       <% else %>
           <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
-          <%= f.input :name %>
-          <%= f.input :email %>
+          <%= f.input :name, label: 'Nom' %>
+          <%= f.input :email, label: 'Email' %>
           <%= f.button :submit, "Ajouter un invité", class: "mt-2" %>
         <% end %>
 

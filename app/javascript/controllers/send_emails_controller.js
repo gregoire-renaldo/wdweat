@@ -1,34 +1,32 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["email"];
-  // static values = {
-  //   "selection": String
-  // }
+  static targets = ["email","button"];
 
   connect() {
     console.log(this.element);
     console.log(this.element.attributes[2].value);
     console.log(this.emailTargets);
-    console.log(this.selectionValue);
+    console.log('button',this.buttonTarget);
   }
 
   sendEmails() {
     console.log(this.emailTargets);
+    const button = this.buttonTarget
     const emailsFromClient = this.emailTargets;
     const emails = [];
-    emailsFromClient.forEach((element, index) => {
+    emailsFromClient.forEach((element) => {
       emails.push(`${element.innerHTML}`);
     });
-    // email-${index}=
-
     const params_email = emails;
     const param_selection = this.element.attributes[2].value;
     fetch(
       `/send_emails_to_guests?guests=${params_email}&selection=${param_selection}`,
-      { method: "POST" }
-    )
+      { method: "POST" })
       .then(function (response) {
+        button.disabled = true
+        button.value = "Invitations envoyées"
+        alert('emails envoyés !')
         console.log(response);
       })
       .catch(function (error) {

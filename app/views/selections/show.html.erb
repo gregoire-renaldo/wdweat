@@ -1,17 +1,39 @@
-<div class="container" data-controller="send-emails" data-send-emails-selection-value="<%= @selection.id %>">
+<div class="container mb-5" data-controller="send-emails" data-send-emails-selection-value="<%= @selection.id %>">
   <div class="mt-3" >
       <%= link_to "<-- Retourner à la liste des sélections", selections_path, class: "btn btn-primary" %>
   </div>
-  <div>
-  <%= @selection.name%>
-  <%= @selection.date%>
+
+
+  <div class="card text-center my-4">
+    <div class="card-header">
+      Ma sélection
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= @selection.name %></h5>
+      <p class="card-text">Date: <%= @selection.date.strftime('%d/%m/%y')%>   Heure: <%= @selection.date.strftime("%H:%M") %></p>
+    </div>
   </div>
+
+  <div class="mb-5">
+    <h2>Pour décider à plusieurs de l'endroit où vous allez manger,
+      sélectionnez plusieurs restaurants, envoyez les par mail et laissez vos amis voter !
+    </h2>
+    <ul>
+      <li>1 - Ajouter des restaurants à votre sélection</li>
+      <li>2 - Ajouter des invités </li>
+      <li>3 - Cliquer sur "envoyer les invitations" pour envoyer les invitations par mail.</li>
+      <li>4 - Les invités accèdent à votre sélection et votent pour leur restaurant favori</li>
+    </ul>
+  </div>
+
   <div>
     <h2 class="text-center">Restaurants selectionnés : </h2>
-    <div class="row justify-content-around">
+    <div class="row mb-4 justify-content-evenly">
       <% if @selection.restaurants.blank? %>
-        <p class="text-center"> Vous n'avez pas encore choisi de restaurants</p>
+        <p class="text-center"> Vous n'avez pas encore choisi de restaurants !</p>
+      <div class="col text-center">
         <%= link_to "Ajouter des restaurants à la selection", results_path(selection_id: @selection.id), class: "btn btn-primary mt-2 mb-2" %>
+      </div>
       <%else%>
         <%= link_to "Ajouter des restaurants à la selection", results_path(selection_id: @selection.id), class: "btn btn-primary mt-2 mb-2" %>
         <% @selection.restaurants.each do |restaurant| %>
@@ -34,7 +56,7 @@
                           class: "mt-1 btn btn-secondary" %>
 
               <a href="<%= restaurant.url %>" target="blank" class="mt-1 btn btn-primary  mb-1">En savoir plus</a>
-              <%= link_to "Supprimer #{restaurant.name}",
+              <%= link_to "Supprimer",
                           restaurant_path(restaurant, selection_id: @selection.id),
                           method: :delete,
                           data: { confirm: "Êtes-vous sûr ?" },
@@ -48,27 +70,33 @@
 
   <div class="text-center" id="guests">
     <h2>Invités </h2>
-      <div class="guests-list">
+      <div class="border mx-auto">
           <% @selection.guests.each do |guest| %>
-            <p  id="guest-<%= guest.id %>"><%= guest.name %> <%= guest.email %></p>
-            <p data-send-emails-target="email"><%= guest.email %></p>
-            <%= link_to "Delete", guest_path(guest, selection_id: @selection.id),
+          <div class="border-bottom">
+            <p id="guest-<%= guest.id %>">Nom: <%= guest.name %> </p>
+            <p data-send-emails-target="email">Email: <%= guest.email %></p>
+            <%= link_to "Supprimer", guest_path(guest, selection_id: @selection.id),
                         method: :delete, remote: true, class: "btn btn-danger mb-3" %>
+          </div>
           <% end %>
         <div class="text-center">
-          <button class="my-2 btn btn-secondary" data-action="send-emails#sendEmails">Envoyer les invitations</button>
+          <button class="my-2 btn btn-secondary"
+          data-action="send-emails#sendEmails"
+          data-send-emails-target="button">
+          Envoyer les invitations
+          </button>
         </div>
       </div>
 
       <% if @selection.guests.blank? %>
-        Commencer à ajouter des invités à la sélection <%= @selection.name %>
+      <h2 class="mt-3">Commencer à inviter vos amis <%= @selection.name %></h2>
         <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
           <%= f.input :name, label: 'Nom' %>
           <%= f.input :email, label: 'Email' %>
           <%= f.button :submit, "Ajouter un invité", class: "mt-2 btn btn-secondary" %>
         <% end %>
       <% else %>
-      <div class="mt-3 guests-list">
+      <div class="mt-3 border mx-auto">
         <h2>Ajouter des invités</h2>
           <%= simple_form_for([@selection, @guest], remote: true) do |f| %>
           <%= f.input :name, label: 'Nom' %>

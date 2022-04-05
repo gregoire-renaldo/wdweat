@@ -8,9 +8,6 @@ Rails.application.routes.draw do
   post '/search', to: 'yelp#search'
   post '/search_random', to: 'yelp#search_random'
 
-  # get "selections", to: "selections#index"
-  # get "selections/new", to: "selections#new"
-  # post "selections", to: "selections#create"
   resources :selections, only: [:new, :create]
   resources :selections, only: [ :index, :show, :destroy ] do
     resources :guests, only: [:create]

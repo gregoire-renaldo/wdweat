@@ -6,7 +6,6 @@ class RestaurantsController < ApplicationController
 
   def create
     id = params[:id]
-    puts params[:selection_id]
     selection_id =  params[:selection_id]
     @response =  RestClient.get "https://api.yelp.com/v3/businesses/#{id}",
     {content_type: :json, accept: :json, Authorization: ENV["API_KEY"]}

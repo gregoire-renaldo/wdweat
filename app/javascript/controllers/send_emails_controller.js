@@ -4,10 +4,6 @@ export default class extends Controller {
   static targets = ["email","button"];
 
   connect() {
-    console.log(this.element);
-    console.log(this.element.attributes[2].value);
-    console.log(this.emailTargets);
-    console.log('button',this.buttonTarget);
   }
 
   sendEmails() {

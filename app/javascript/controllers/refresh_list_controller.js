@@ -138,8 +138,6 @@ export default class extends Controller {
     fetch(`/search_random?location=${place}`, { method: "POST" })
       .then(function (response) {
         response.json().then(function (data) {
-          console.log(data);
-          console.log(target);
           target.innerHTML = "";
           if (data === [])
             target.insertAdjacentHTML(

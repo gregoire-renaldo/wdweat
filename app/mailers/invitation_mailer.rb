@@ -9,6 +9,6 @@ class InvitationMailer < ApplicationMailer
 
     # guest_email
     puts 'in new_invitation_email'
-    mail(to: email, subject: "Voici une sélection de restaux ")
+    mail(from: "Where do we eat today ?" ,to: email, subject: "Voici une sélection de restaux ")
   end
 end

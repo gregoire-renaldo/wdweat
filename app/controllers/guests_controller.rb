@@ -24,17 +24,21 @@ class GuestsController < ApplicationController
     def send_emails_to_guests
       puts params
       selection = params[:selection]
-      puts 'params selection'
-      puts selection
-
       puts 'guest'
-      guests = params[:guests].split(',')
-      puts guests.class
+      guests = params[:guests]
       puts guests
+      # " Email: kkni@mail.com,Email: gregoire.renaldo@gmail.com"
+      puts guests.class
+      array = guests.split(',')
+      email_array = []
+      array.each do |pair|
+        email_array << pair.split(':')[1].strip
+      end
+      puts email_array
 
       # InvitationMailer.with(invitation: @invitation).new_invitation_email.deliver_now
       # InvitationMailer.new_invitation_email(email, selection).deliver_now
-      guests.each do |guest|
+      email_array.each do |guest|
         InvitationMailer.new_invitation_email(guest, selection).deliver_now
       end
 

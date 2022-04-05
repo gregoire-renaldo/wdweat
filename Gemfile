@@ -33,7 +33,7 @@ gem 'rest-client', '~> 2.1'
 gem "faraday"
 
 # style emails - use stylesheets etc instead of email css
-gem 'premailer-rails'
+# gem 'premailer-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

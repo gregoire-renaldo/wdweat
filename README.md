@@ -10,9 +10,9 @@
  - Voter : incrémenter ou décrémenter score du restaurant
  -
 ## To do
+- Tests :-)
 - Loader à ajouter pendant les fetchs
 - Finaliser Devise en paramétrant les emails
-- Tests :-)
 - Front emails
 - Front au global
 - Améliorer le système de vote: le restreindre à 1 vote par utilisateur

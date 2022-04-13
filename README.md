@@ -21,3 +21,4 @@
 - Refacto JS
 - Footer
 - Alertes
+- Emails Devise

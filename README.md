@@ -25,3 +25,5 @@
 - Empecher les guests de modifier la date
 - Ne pas pouvoir chosir date antérieure
 - Styliser tout ça:  joli date picker etc .. calendar ?
+- ne pas pouvoir ajouter 2 fois le même restau
+- rgpd

@@ -1,12 +1,14 @@
 <div class="container mb-5" data-controller="send-emails" data-send-emails-selection-value="<%= @selection.id %>">
+<% if current_user %>
   <div class="mt-3" >
       <%= link_to "<-- Retourner à la liste des sélections", selections_path, class: "btn btn-primary" %>
   </div>
+<% end %>
 
 
   <div class="card text-center my-4">
     <div class="card-header">
-      Ma sélection
+      <%= @selection.name %>
     </div>
     <div class="card-body">
       <h5 class="card-title"><%= @selection.name %></h5>
@@ -14,6 +16,7 @@
     </div>
   </div>
 
+<% if current_user %>
   <div class="mb-5">
     <h2>Pour décider à plusieurs de l'endroit où vous allez manger,
       sélectionnez plusieurs restaurants, envoyez les par mail et laissez vos amis voter !
@@ -25,7 +28,7 @@
       <li>4 - Les invités accèdent à votre sélection et votent pour leur restaurant favori</li>
     </ul>
   </div>
-
+<% end %>
   <div>
     <h2 class="text-center">Restaurants selectionnés : </h2>
     <div class="row mb-4 justify-content-evenly">
@@ -67,7 +70,7 @@
       <% end %>
     </div>
   </div>
-
+<% if current_user %>
   <div class="text-center" id="guests">
     <h2>Invités </h2>
       <div class="border mx-auto">
@@ -106,5 +109,5 @@
       </div>
       <% end %>
   </div>
-
+<% end %>
 <div>

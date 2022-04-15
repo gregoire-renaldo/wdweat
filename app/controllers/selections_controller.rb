@@ -10,19 +10,34 @@ class SelectionsController < ApplicationController
     @selection.user_id = current_user.id
 
     if @selection.save
-      redirect_to selection_path(@selection)
+      # redirect_to selection_path(@selection)
+      redirect_to selections_path(@selection)
     else
-      render "new"
+      # render "new"
+      render "index"
     end
   end
 
   def index
-    @selections = Selection.all.where(user_id: current_user.id)
+    @selection = Selection.new
+    @selections = Selection.all.where(user_id: current_user.id).order(date: :desc)
   end
 
   def show
     @selection = Selection.find(params[:id])
     @guest = Guest.new
+  end
+
+  def edit
+    @selection = Selection.find(params[:id])
+  end
+
+  def update
+    @selection = Selection.find(params[:id])
+    @selection.update(selection_params)
+
+    # no need for app/views/restaurants/update.html.erb
+    redirect_to selections_path(@selection)
   end
 
   def destroy

@@ -22,3 +22,6 @@
 - Footer
 - Alertes
 - Emails Devise
+- Empecher les guests de modifier la date
+- Ne pas pouvoir chosir date antérieure
+- Styliser tout ça:  joli date picker etc .. calendar ?

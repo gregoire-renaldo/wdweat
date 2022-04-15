@@ -1,15 +1,13 @@
 <div class="container">
   <h1 class="mt-4 text-center">Voir et créer des sélections</h1>
-  <div class="text-center mb-3">
-    <%= link_to "Créer nouvelle sélection", new_selection_path, class: "btn btn-primary rounded" %>
-  </div>
+
 
   <div>
     <h2>test ajax create</h2>
     <%= simple_form_for(@selection, remote: true) do |f| %>
-      <%= f.input :name %>
-      <%= f.input :date, as: :date, html5: true %>
-      <%= f.button :submit %>
+      <%= f.input :name, required: true %>
+      <%= f.input :date, html5: true,  input_html: { min: Time.now }, required: true %>
+      <%= f.button :submit, class: "btn btn-primary rounded" %>
     <% end %>
   </div>
     <h2 class="text-center">Mes restaurants préférés</h2>
@@ -26,11 +24,12 @@
             <% end %>
           <p class="card-text">Date: <%= selection.date.strftime("%d/%m/%y") %></p>
           <p class="card-text">Heure: <%= selection.date.strftime("%H:%M") %></p>
-          <%= simple_form_for(selection, remote: true) do |f| %>
-              <%= f.input :date %>
-              <%= f.button :submit, "Changer la date et l'heure" %>
-          <% end %>
+            <%= simple_form_for(selection, remote: true) do |f| %>
+                <%= f.input :date %>
+                <%= f.button :submit, "Changer la date et l'heure" %>
+            <% end %>
           <p class="card-text">Nombre de restaurants : <%= selection.restaurants.count %></p>
+          
           <% selection.restaurants.each do |restaurant| %>
             <p><%= restaurant.name %></p>
           <% end %>

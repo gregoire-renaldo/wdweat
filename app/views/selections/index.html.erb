@@ -6,15 +6,15 @@
     <h2>test ajax create</h2>
     <%= simple_form_for(@selection, remote: true) do |f| %>
       <%= f.input :name, required: true %>
-      <%= f.input :date, html5: true,  input_html: { min: Time.now }, required: true %>
+      <%= f.input :date, :order => [ :day, :month, :year, :hour, :minute], html5: true,  input_html: { min: Time.now }, required: true   %>
       <%= f.button :submit, class: "btn btn-primary rounded" %>
     <% end %>
   </div>
-    <h2 class="text-center">Mes restaurants préférés</h2>
+    <h2 class="text-center">Mes sélections</h2>
 
   <div class="row">
     <% @selections&.each do |selection| %>
-    <div class="col-sm-4 mt-2">
+    <div class="col-sm-4 mt-2" style="width:400px;">
       <div class="card card-selection">
         <div class="card-body">
           <h5 class="card-title"><%= selection.name %>t</h5>
@@ -24,12 +24,16 @@
             <% end %>
           <p class="card-text">Date: <%= selection.date.strftime("%d/%m/%y") %></p>
           <p class="card-text">Heure: <%= selection.date.strftime("%H:%M") %></p>
+          <div class="row">
+
             <%= simple_form_for(selection, remote: true) do |f| %>
-                <%= f.input :date %>
-                <%= f.button :submit, "Changer la date et l'heure" %>
+              <%= f.date_select :date, :order => [ :day, :month, :year, :hour, :minute]%>
+              <%= f.button :submit, "Changer la date et l'heure" %>
             <% end %>
+          </div>
+
           <p class="card-text">Nombre de restaurants : <%= selection.restaurants.count %></p>
-          
+
           <% selection.restaurants.each do |restaurant| %>
             <p><%= restaurant.name %></p>
           <% end %>
